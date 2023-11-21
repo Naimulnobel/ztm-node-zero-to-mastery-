@@ -16,7 +16,15 @@ const friends = [
 ]
 server.on('request', (req, res) => {
     const items = req.url.split('/');
-    if (items[1] === 'friends') {
+    if (req.method === 'POST' && items[1] === 'friends') {
+        req.on('data', (data) => {
+            const friend = JSON.parse(data.toString());
+            friends.push(friend);
+            res.statusCode = 201;
+            res.end(JSON.stringify(friend));
+        })
+    }
+    else if (req.method === 'GET' && items[1] === 'friends') {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         if (items.length === 3) {
@@ -45,7 +53,7 @@ server.on('request', (req, res) => {
     else {
         res.statusCode = 404;
         res.setHeader('Content-Type', 'text/html');
-        
+
         res.write(`<html>
         <head>
           <title>404</title>
