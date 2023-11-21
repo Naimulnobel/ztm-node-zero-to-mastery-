@@ -41,10 +41,6 @@ server.on('request', (req, res) => {
             </body>
             </html>`);
         res.end();
-    } else if (req.url === '/friends/:id') {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(friends[0]));
     }
     else {
         res.statusCode = 404;
