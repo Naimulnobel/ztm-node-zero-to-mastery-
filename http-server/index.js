@@ -45,6 +45,7 @@ server.on('request', (req, res) => {
     else {
         res.statusCode = 404;
         res.setHeader('Content-Type', 'text/html');
+        
         res.write(`<html>
         <head>
           <title>404</title>
