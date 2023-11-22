@@ -39,6 +39,11 @@ app.get('/friends/:id', (req, res) => {
 })
 app.post('/friends', (req, res) => {
     let { name } = req.body;
+    if (!name) {
+        return res.status(400).json({
+            message: 'required field missing'
+        });
+    }
     const friend = { id: friends.length, name: name };
     friends.push(friend);
     res.status(201).json(friend);
