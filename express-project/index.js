@@ -45,7 +45,7 @@ app.post('/friends', (req, res) => {
 
 })
 app.get('/message', (req, res) => {
-    res.send('Hello World!');
+    res.json('Hello World!');
 })
 app.listen(port, () => {
     console.log(`Server is running on port ${port}...`);
