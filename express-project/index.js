@@ -21,6 +21,13 @@ app.get('/friends', (req, res) => {
 })
 app.get('/friends/:id', (req, res) => {
     const friendIndex = +req.params.id;
+    const friend = friends[friendIndex];
+    if (!friend) {
+        return res.status(404).json({
+            message: 'Friend not found'
+        });
+
+    }
     res.json(friends[friendIndex]);
 })
 app.post('/friends', (req, res) => {
