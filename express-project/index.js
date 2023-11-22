@@ -38,8 +38,8 @@ app.get('/friends/:id', (req, res) => {
     res.status(200).json(friend);
 })
 app.post('/friends', (req, res) => {
-    let { id, name } = req.body;
-    const friend = { id: +id, name: name };
+    let { name } = req.body;
+    const friend = { id: friends.length, name: name };
     friends.push(friend);
     res.status(201).json(friend);
 
