@@ -16,6 +16,10 @@ const friends = [
         name: 'Isaac Newton'
     }
 ]
+app.use((req, res, next) => {
+    console.log(`method:${req.method} url:${req.url}`);
+    next();
+});
 
 app.get('/friends', (req, res) => {
     res.json(friends);
