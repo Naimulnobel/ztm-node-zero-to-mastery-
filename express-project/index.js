@@ -33,7 +33,7 @@ app.get('/friends/:id', (req, res) => {
         });
 
     }
-    res.status(200).json(friends[friendIndex]);
+    res.status(200).json(friend);
 })
 app.post('/friends', (req, res) => {
     let { id, name } = req.body;
