@@ -31,8 +31,12 @@ app.get('/friends/:id', (req, res) => {
     res.status(200).json(friends[friendIndex]);
 })
 app.post('/friends', (req, res) => {
-    friends.push(req.body);
-    res.status(200).json(friends);
+    let id = req.body.id;
+    let name = req.body.name;
+    const friend = { id: +id, name: name };
+    friends.push(friend);
+    res.status(201).json(friend);
+
 })
 app.get('/message', (req, res) => {
     res.send('Hello World!');
