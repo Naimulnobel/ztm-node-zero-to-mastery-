@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+app.use(express.json());
 const friends = [
     {
         id: 0,
@@ -31,8 +32,7 @@ app.get('/friends/:id', (req, res) => {
     res.status(200).json(friends[friendIndex]);
 })
 app.post('/friends', (req, res) => {
-    let id = req.body.id;
-    let name = req.body.name;
+    let { id, name } = req.body;
     const friend = { id: +id, name: name };
     friends.push(friend);
     res.status(201).json(friend);
