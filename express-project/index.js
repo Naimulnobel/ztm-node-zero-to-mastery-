@@ -46,12 +46,12 @@ app.post('/friends', (req, res) => {
     }
     const friend = { id: friends.length, name: name };
     friends.push(friend);
-    res.status(201).json(friend);
+    return res.status(201).json(friend);
 
 })
 app.get('/message', (req, res) => {
-    res.json('Hello World!');
+    return res.json('Hello World!');
 })
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}...`);
+    return console.log(`Server is running on port ${port}...`);
 })
