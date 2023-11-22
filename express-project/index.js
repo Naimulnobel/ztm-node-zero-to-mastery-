@@ -28,11 +28,11 @@ app.get('/friends/:id', (req, res) => {
         });
 
     }
-    res.json(friends[friendIndex]);
+    res.status(200).json(friends[friendIndex]);
 })
 app.post('/friends', (req, res) => {
     friends.push(req.body);
-    res.json(friends);
+    res.status(200).json(friends);
 })
 app.get('/message', (req, res) => {
     res.send('Hello World!');
