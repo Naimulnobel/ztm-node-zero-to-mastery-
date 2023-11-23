@@ -9,7 +9,7 @@ app.use((req, res, next) => {
     const start = Date.now();
     next();
     const delta = Date.now() - start;
-    console.log(`${req.method} ${req.url} ${delta}ms`);
+    console.log(`${req.method} ${req.url} ${req.baseUrl} ${delta}ms`);
 });
 
 app.use('/messages', messagesRouter);
