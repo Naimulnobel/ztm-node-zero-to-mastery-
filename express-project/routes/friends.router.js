@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const friendsController = require('../controllers/friends.comtroller');
-router.get('/', friendsController.getFriends)
-router.get('/:id', friendsController.getFriend)
-router.post('/', friendsController.postFriend)
+const { getFriends, getFriend, postFriend } = require('../controllers/friends.comtroller');
+router.get('/', getFriends)
+router.get('/:id', getFriend)
+router.post('/', postFriend)
 module.exports = router;
