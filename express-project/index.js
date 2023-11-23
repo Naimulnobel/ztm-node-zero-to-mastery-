@@ -4,7 +4,7 @@ const port = 3000;
 const messagesRouter = require('./routes/messages.router');
 const friendsRouter = require('./routes/friends.router');
 const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/", express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.use((req, res, next) => {
