@@ -1,5 +1,9 @@
+const path = require('path');
+
 function getMessages(req, res) {
-    return res.json('Hello World!');
+    res.sendFile(path.join(__dirname, '..', "public", 'cash.jpg'));
+
+    // return res.json('Hello World!');
 }
 function postMessage(req, res) {
     console.log('updeing message');
