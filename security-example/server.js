@@ -4,13 +4,26 @@ const https = require('https');
 const express = require('express');
 const helmet = require('helmet');
 require('dotenv').config();
+const passport = require('passport');
+const { Strategy } = require('passport-google-oauth20');
 const PORT = 3000;
 const app = express();
 app.use(helmet());
+app.use(passport.initialize());
 const config = {
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET,
 }
+passport.use(new Strategy({
+    clientID: config.CLIENT_ID,
+    clientSecret: config.CLIENT_SECRET,
+    callbackURL: 'https://localhost:3000/auth/google/callback'
+}, (accessToken, refreshToken, profile, done) => {
+    console.log('accessToken', accessToken);
+    console.log('refreshToken', refreshToken);
+    console.log('profile', profile);
+    done(null, profile);
+}));
 function checkLoggedIN(req, res, next) {
     const isLoggedIn = true;
     if (!isLoggedIn) {
@@ -20,11 +33,16 @@ function checkLoggedIN(req, res, next) {
     }
     next();
 }
-app.get('/auth/google', (req, res) => {
+app.get('/auth/google', passport.authenticate('google', {
+    scope: ['email']
 
-});
-app.get('/auth/google/callback', (req, res) => {
-
+}));
+app.get('/auth/google/callback', passport.authenticate('google', {
+    sucessRedirect: '/',
+    failureRedirect: '/failure',
+    session: false
+}), (req, res) => {
+    res.redirect('/');
 });
 app.get('/auth/logout', (req, res) => {
 
@@ -36,6 +54,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 }
 );
+
+app.get('/failure', (req, res) => {
+    res.send('you failed to log in');
+})
 
 https.createServer(
     {
