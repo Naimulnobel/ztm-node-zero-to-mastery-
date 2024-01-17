@@ -26,7 +26,7 @@ passport.use(new Strategy({
     done(null, profile);
 }));
 passport.serializeUser((user, done) => {
-    done(null, user);
+    done(null, user.id);
 }
 );
 passport.deserializeUser((user, done) => {
@@ -37,9 +37,9 @@ const app = express();
 app.use(helmet());
 app.use(cookieSession({
     name: 'session',
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
     keys: [config.COOKIE_KEY_1, config.COOKIE_KEY_2]
-}))
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
