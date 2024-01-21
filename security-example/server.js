@@ -47,7 +47,7 @@ app.use(passport.session());
 
 
 function checkLoggedIN(req, res, next) {
-    const isLoggedIn = true;
+    const isLoggedIn = req.isAuthenticated() && req.user;
     if (!isLoggedIn) {
         res.status(401).json({
             error: 'you must be logged in to access this resource'
@@ -70,6 +70,8 @@ app.get('/auth/google/callback',
     }
 );
 app.get('/auth/logout', (req, res) => {
+    req.logout()
+    return res.redirect('/');
 
 });
 app.get('/secret', checkLoggedIN, (req, res) => {
